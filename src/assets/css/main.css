@@ -1,3 +1,29 @@
+body{
+    background-color: #B4EDFF;
+    
+}
 #landing{
-background-color: blue;
+    border: 1px solid black;
+    height: 99.7vh;
+    display: flex;
+    flex-direction: column;
+
+}
+#nav{
+    /* border: 1px solid black; */
+    height: 10vh;
+    width: 99.6vw;
+    display: flex;
+    justify-content: flex-end;
+
+}
+#nav h2{
+    margin-right:10% ;
+    font-family:'Times New Roman', Times, serif;
+    border-bottom: 1px solid #0000FF;
+}
+#landing-body{
+    border: 1px solid black;
+    height: 89vh;
+
 }
