@@ -1,3 +1,5 @@
+import RainbowSquare from "./RainbowSquare"
+
 const LandingPage = () =>{
     return(
         <div id="landing">
@@ -10,6 +12,11 @@ const LandingPage = () =>{
                 {/* body cont */}
                 <div id="landing-content">
                     {/* content */}
+
+                    <div id="content-cont">
+
+                        <RainbowSquare />
+                    </div>
                 </div>
                 <div id="auth">
                     {/* auth */}
