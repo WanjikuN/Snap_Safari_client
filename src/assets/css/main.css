@@ -110,13 +110,16 @@ body{
   }
 
   #content-body{
-    /* border: 2px solid blue; */
-    /* height: 100%; */
+    border-bottom: 3px solid blue;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    height: 95%;
     width: 85%;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 15px 5%;
+    margin: 0px 15px;
 
   }
   .striped-row{
