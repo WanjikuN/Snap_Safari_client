@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
 import LinearProgress from '@mui/material/LinearProgress';
-import Box from '@mui/material/Box';
-import axios from 'axios';
 
 const Users = () => {
   const [rows, setRows] = useState([]);
