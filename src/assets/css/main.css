@@ -4,8 +4,8 @@ body{
 }
 /* landing page */
 #landing{
-    border: 1px solid black;
-    height: 99.7vh;
+    /* border: 1px solid black; */
+    height: 89.7vh;
     display: flex;
     flex-direction: column;
 
@@ -74,4 +74,26 @@ body{
   }
   .grayscale-on-default {
     filter: grayscale(100%);
+  }
+  /* Homepage */
+  #main-cont{
+    border: 1px solid black;
+    height: 89vh;
+    display: flex;
+  }
+  #sidebar{
+    border: 1px solid black;
+    height: 100%;
+    width:6%;
+
+  }
+  #content-body{
+    border: 1px solid black;
+    /* height: 100%; */
+    width: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 5%;
+
   }
