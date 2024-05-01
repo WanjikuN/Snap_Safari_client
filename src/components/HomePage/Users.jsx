@@ -10,15 +10,20 @@ const Users = () => {
   const [loading, setLoading] = useState(true);
 console.log(rows)
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://snap-safari-backend.onrender.com/users');
-        setRows(response); // Assuming the response data is an array of objects
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
+   
+      const fetchData = async () => {
+          try {
+              const response = await fetch('http://snap-safari-backend.onrender.com/users');
+              if (!response.ok) {
+                  throw new Error('Network response was not ok');
+              }
+              const data = await response.json();
+              setRows(data); 
+              setLoading(false);
+          } catch (error) {
+              console.error('Error fetching data:', error);
+          }
+      };
 
     fetchData();
   }, []);
