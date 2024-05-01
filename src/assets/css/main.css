@@ -136,3 +136,32 @@ body{
     width: 0;
     height: 0;
   }
+  .side-navigation {
+    position: fixed;
+    top: 10vh;
+    left: 0;
+    width: 60%;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    z-index: 1000;
+  }
+  
+  .side-navigation p {
+    margin: 0;
+  }
+  
+  .side-navigation button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .side-navigation button:hover {
+    background-color: #555;
+  }
+  

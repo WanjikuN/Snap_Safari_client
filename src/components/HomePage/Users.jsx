@@ -6,6 +6,8 @@ import LinearProgress from '@mui/material/LinearProgress';
 const Users = () => {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedRow, setSelectedRow] = useState(null);
+
 console.log(rows)
   useEffect(() => {
    
@@ -50,9 +52,12 @@ console.log(rows)
 
   // Define the function to handle row click
   const handleRowClick = (params) => {
-    // Add your logic to handle row clicks
+    console.log()
+    setSelectedRow(params.row);
   };
-
+  const closeSideNavigation = () => {
+    setSelectedRow(null);
+  };
   return (
     <div id="main-cont">
       <Sidebar />
@@ -79,6 +84,14 @@ console.log(rows)
             />
           
       </div>
+      {selectedRow && (
+        <div className="side-navigation">
+          <button onClick={closeSideNavigation}>Close</button>
+          <p>Name: {selectedRow.name}</p>
+          <p>Username: {selectedRow.username}</p>
+          <p>Email: {selectedRow.email}</p>
+        </div>
+      )}
     </div>
   );
 };
