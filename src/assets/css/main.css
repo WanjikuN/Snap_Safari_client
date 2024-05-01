@@ -1,5 +1,5 @@
 body{
-    background-color: #B4EDFF;
+    background-color: #b4eeffa1;
     
 }
 /* landing page */
@@ -77,12 +77,12 @@ body{
   }
   /* Homepage */
   #main-cont{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     height: 89vh;
     display: flex;
   }
   #sidebar{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     height: 100%;
     width:6%;
     display: flex;
@@ -112,6 +112,15 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 5px 5%;
+    padding: 15px 5%;
+
+  }
+  .striped-row{
+    background-color: #a5dbeb37;
+    ;
+    cursor: pointer;
+  }
+  .striped-row-none{
+    cursor: pointer;
 
   }
