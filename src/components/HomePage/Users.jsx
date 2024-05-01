@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
 import LinearProgress from '@mui/material/LinearProgress';
+import OpenSidenav from './OpenSidenav';
 
 const Users = () => {
   const [rows, setRows] = useState([]);
@@ -45,10 +46,7 @@ console.log(rows)
     // Add more columns as needed
   ];
 
-  // Define the function to handle edit cell changes
-  const handleEditCellChange = (params) => {
-    // Add your logic to handle cell edits
-  };
+
 
   // Define the function to handle row click
   const handleRowClick = (params) => {
@@ -61,7 +59,10 @@ console.log(rows)
   return (
     <div id="main-cont">
       <Sidebar />
-      <div id="content-body">
+       {selectedRow && (
+        <OpenSidenav onClose={closeSideNavigation} selectedRow={selectedRow} />
+      )}
+      <div id="content-body" style={{ width: selectedRow ? '35%' : '100%' }}>
           <div></div>
             <DataGrid
               rows={rows}
@@ -71,7 +72,6 @@ console.log(rows)
                 loadingOverlay: LinearProgress,
               }}
               loading={loading}
-              onEditCellChange={handleEditCellChange}
               pageSize={10}
               pageSizeOptions={[10,15, 25, 50, 100]}
               className="datagrid-root"
@@ -84,14 +84,7 @@ console.log(rows)
             />
           
       </div>
-      {selectedRow && (
-        <div className="side-navigation">
-          <button onClick={closeSideNavigation}>Close</button>
-          <p>Name: {selectedRow.name}</p>
-          <p>Username: {selectedRow.username}</p>
-          <p>Email: {selectedRow.email}</p>
-        </div>
-      )}
+     
     </div>
   );
 };

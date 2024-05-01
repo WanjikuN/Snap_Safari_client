@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from './Sidebar';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
 import LinearProgress from '@mui/material/LinearProgress';
+import OpenSidenav from './OpenSidenav';
 
 const Albums = () => {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedRow, setSelectedRow] = useState(null);
+
 console.log(rows)
   useEffect(() => {
    
@@ -42,20 +45,22 @@ console.log(rows)
     // Add more columns as needed
   ];
 
-  // Define the function to handle edit cell changes
-  const handleEditCellChange = (params) => {
-    // Add your logic to handle cell edits
-  };
-
   // Define the function to handle row click
   const handleRowClick = (params) => {
-    // Add your logic to handle row clicks
+    console.log()
+    setSelectedRow(params.row);
+  };
+  const closeSideNavigation = () => {
+    setSelectedRow(null);
   };
 
   return (
     <div id="main-cont">
       <Sidebar />
-      <div id="content-body">
+      {selectedRow && (
+        <OpenSidenav onClose={closeSideNavigation} selectedRow={selectedRow} />
+      )}
+      <div id="content-body" style={{ width: selectedRow ? '35%' : '100%' }}>
           <div></div>
             <DataGrid
               rows={rows}
@@ -65,7 +70,6 @@ console.log(rows)
                 loadingOverlay: LinearProgress,
               }}
               loading={loading}
-              onEditCellChange={handleEditCellChange}
               pageSize={10}
             //   pageSizeOptions={[10,15, 25, 50, 100]}
               className="datagrid-root"
