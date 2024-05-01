@@ -36,7 +36,10 @@ console.log(rows)
 
   // Define your columns here
   const columns = [
-    // Add your column definitions here
+    { field: 'id', headerName: 'No', width: 50  },
+    { field: 'title', headerName: 'Title', width: 150 ,flex: 1 },
+
+    // Add more columns as needed
   ];
 
   // Define the function to handle edit cell changes
@@ -63,10 +66,10 @@ console.log(rows)
               }}
               loading={loading}
               onEditCellChange={handleEditCellChange}
-              pageSizeOptions={[15, 25, 50, 100]}
+              pageSize={10}
+            //   pageSizeOptions={[10,15, 25, 50, 100]}
               className="datagrid-root"
               onRowClick={handleRowClick}
-              checkboxSelection
               disableColumnSelector
               disableColumnFilter
               getRowClassName={(params) => (params.indexRelativeToCurrentPage % 2 !== 0 ? 'striped-row' : {})}

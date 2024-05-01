@@ -67,7 +67,8 @@ console.log(rows)
               }}
               loading={loading}
               onEditCellChange={handleEditCellChange}
-              pageSizeOptions={[15, 25, 50, 100]}
+              pageSize={10}
+              pageSizeOptions={[10,15, 25, 50, 100]}
               className="datagrid-root"
               onRowClick={handleRowClick}
               disableColumnSelector
