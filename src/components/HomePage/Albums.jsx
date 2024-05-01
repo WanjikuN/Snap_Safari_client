@@ -11,7 +11,7 @@ console.log(rows)
    
       const fetchData = async () => {
           try {
-              const response = await fetch('http://snap-safari-backend.onrender.com/albums');
+              const response = await fetch('https://snap-safari-backend.onrender.com/albums/');
               if (!response.ok) {
                   throw new Error('Network response was not ok');
               }
