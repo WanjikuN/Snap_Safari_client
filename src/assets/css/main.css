@@ -124,7 +124,6 @@ body{
   }
   .striped-row{
     background-color: #a5dbeb37;
-    ;
     cursor: pointer;
   }
   .striped-row-none{
@@ -320,4 +319,40 @@ p {
   font-size: 12px;
 }
 
- 
+ #user-albums{
+  /* border: 1px solid black; */
+  height: 100%;
+ }
+ #user-albums-profile {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-image {
+  margin-right: 20px;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.username {
+  font-weight: bold;
+}
+
+.album-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.album-item {
+  margin-right: 20px;
+}
+
+.album-title {
+  margin-top: 5px;
+  font-size: 14px;
+}
+

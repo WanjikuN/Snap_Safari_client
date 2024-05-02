@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
 import EditableModal from '../../Reusables/EditableModal';
 import BounceLoader from '../../Loaders/BounceLoader';
+import { CgProfile } from "react-icons/cg";
+import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
+import LinearProgress from '@mui/material/LinearProgress';
 
 const OpenSidenav = ({ selectedRow, onClose }) => {
     const location = useLocation();
@@ -11,45 +14,79 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [shouldReload, setShouldReload] = useState(false);
     const [albums, setAlbums] = useState([]);
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setLoading(true);
-                const response = await fetch('https://snap-safari-backend.onrender.com/photos/');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                const filteredPhotos = data.filter(photo => photo.album_id === selectedRow.id);
-                setPhotos(filteredPhotos);
-                setLoading(false);
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
+    const [user, setUser] = useState();
+    const [specificAlbum, setSpecificAlbum] = useState();
 
-        fetchData();
-    }, [selectedRow, shouldReload]); 
-    useEffect(() => {
-   
-        const fetchData = async () => {
-            try {
-              setLoading(true);
-                const response = await fetch('https://snap-safari-backend.onrender.com/albums/');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                  }
-                const data = await response.json();
-                const filteredAlbums = data.filter(album => album.users_id == selectedRow.id)
-                setAlbums(filteredAlbums); 
-                setLoading(false);
-            } catch (error) {
-                console.error('Error fetching data:', error);
+    const fetchPhotos = async () => {
+        try {
+            setLoading(true);
+            const response = await fetch('https://snap-safari-backend.onrender.com/photos/');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
-        };
-  
-      fetchData();
-    }, [selectedRow]);
+            const data = await response.json();
+            const filteredPhotos = data.filter(photo => photo.album_id === selectedRow.id);
+            setPhotos(filteredPhotos);
+            setLoading(false);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+    const fetchAlbums = async () => {
+        try {
+          setLoading(true);
+            const response = await fetch('https://snap-safari-backend.onrender.com/albums/');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+            const data = await response.json();
+            const filteredAlbums = data.filter(album => album.users_id == selectedRow.id)
+            setAlbums(filteredAlbums); 
+            setLoading(false);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+    const fetchUserById = async () => {
+        try {
+          setLoading(true);
+            const response = await fetch(`https://snap-safari-backend.onrender.com/users/${selectedRow.id}`);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+            const data = await response.json();
+            setUser(data); 
+            setLoading(false);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+    const fetchAlbumById = async () => {
+        try {
+          setLoading(true);
+            const response = await fetch(`https://snap-safari-backend.onrender.com/album/${selectedRow.id}`);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+            const data = await response.json();
+            setSpecificAlbum(data); 
+            setLoading(false);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+    console.log("User::",user)
+    useEffect(() => {
+        if (location.pathname === "/users") {
+            fetchUserById();
+            fetchAlbums();
+        } else {
+            fetchPhotos();
+            fetchAlbumById();
+        }
+    }, [location.pathname, selectedRow, shouldReload]);
+    
+    
     const handlePhotoClick = (photo) => {
         setSelectedPhoto(photo);
         setIsModalOpen(true);
@@ -58,7 +95,12 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
     const handleTitleChange = () => {
         setShouldReload(!shouldReload); 
     };
-
+    function CustomToolbar() {
+        return (
+          <GridToolbarContainer>
+          </GridToolbarContainer>
+        );
+      }
     return (
         <>
         {loading ? (
@@ -68,14 +110,32 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
             <div className="side-navigation">
                 <button onClick={onClose}>Close</button>
                 {location.pathname === "/users" ? (
-                    <>
-                        {
-                            albums.map(album =>(
-                            
-                                <div key={album.id}>{album.title}</div>
-                            ))
-                        }
-                    </>
+                    <div id="user-albums">
+                    <div id="user-albums-profile">
+                        {/* User Profile */}
+                        <div className="profile-image">
+                            <CgProfile size={40} />
+                        </div>
+                        <div className="profile-info">
+                            <p className="username">{user.username}</p>
+                            <p className="email">{user.email}</p>
+                        </div>
+                    </div>
+                    <DataGrid
+                        rows={albums}
+                        columns={[
+                            { field: 'id', headerName: 'ID', width: 100 },
+                            { field: 'title', headerName: 'Title', width: 200 },
+                        ]}
+                        slots={{
+                            toolbar: CustomToolbar,
+                            loadingOverlay: LinearProgress,
+                          }}
+                        pageSize={5}
+                        disableSelectionOnClick // Disables row selection on click
+                        />
+                </div>
+                
                 ) : (
                     <div id="photos-container">
                         {photos.map(photo => (
