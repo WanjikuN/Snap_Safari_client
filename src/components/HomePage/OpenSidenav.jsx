@@ -10,7 +10,7 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
     const [selectedPhoto, setSelectedPhoto] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [shouldReload, setShouldReload] = useState(false);
-
+    const [albums, setAlbums] = useState([]);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -29,15 +29,34 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
         };
 
         fetchData();
-    }, [selectedRow, shouldReload]); // Include shouldReload in the dependency array
-
+    }, [selectedRow, shouldReload]); 
+    useEffect(() => {
+   
+        const fetchData = async () => {
+            try {
+              setLoading(true);
+                const response = await fetch('https://snap-safari-backend.onrender.com/albums/');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                  }
+                const data = await response.json();
+                const filteredAlbums = data.filter(album => album.users_id == selectedRow.id)
+                setAlbums(filteredAlbums); 
+                setLoading(false);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+  
+      fetchData();
+    }, [selectedRow]);
     const handlePhotoClick = (photo) => {
         setSelectedPhoto(photo);
         setIsModalOpen(true);
     };
 
     const handleTitleChange = () => {
-        setShouldReload(!shouldReload); // Toggle shouldReload state
+        setShouldReload(!shouldReload); 
     };
 
     return (
@@ -50,9 +69,12 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
                 <button onClick={onClose}>Close</button>
                 {location.pathname === "/users" ? (
                     <>
-                        <p>Name: {selectedRow.name}</p>
-                        <p>Username: {selectedRow.username}</p>
-                        <p>Email: {selectedRow.email}</p>
+                        {
+                            albums.map(album =>(
+                            
+                                <div key={album.id}>{album.title}</div>
+                            ))
+                        }
                     </>
                 ) : (
                     <div id="photos-container">
@@ -71,7 +93,7 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
                 <EditableModal
                     photo={selectedPhoto}
                     onClose={() => setIsModalOpen(false)}
-                    onTitleChange={handleTitleChange} // Pass the callback function
+                    onTitleChange={handleTitleChange}
                 />
             )}
               </>

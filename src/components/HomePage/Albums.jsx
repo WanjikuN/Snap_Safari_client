@@ -34,20 +34,16 @@ console.log(rows)
   function CustomToolbar() {
     return (
       <GridToolbarContainer>
-        {/* Add your custom toolbar buttons here */}
       </GridToolbarContainer>
     );
   }
 
-  // Define your columns here
   const columns = [
     { field: 'id', headerName: 'No', width: 50  },
     { field: 'title', headerName: 'Title', width: 150 ,flex: 1 },
 
-    // Add more columns as needed
   ];
 
-  // Define the function to handle row click
   const handleRowClick = (params) => {
     console.log()
     setSelectedRow(params.row);
