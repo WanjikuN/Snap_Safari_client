@@ -3,6 +3,7 @@ import Sidebar from './Sidebar';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
 import LinearProgress from '@mui/material/LinearProgress';
 import OpenSidenav from './OpenSidenav';
+import BounceLoader from '../../Loaders/BounceLoader';
 
 const Albums = () => {
   const [rows, setRows] = useState([]);
@@ -14,10 +15,11 @@ console.log(rows)
    
       const fetchData = async () => {
           try {
+            setLoading(true);
               const response = await fetch('https://snap-safari-backend.onrender.com/albums/');
               if (!response.ok) {
                   throw new Error('Network response was not ok');
-              }
+                }
               const data = await response.json();
               setRows(data); 
               setLoading(false);
@@ -57,11 +59,15 @@ console.log(rows)
   return (
     <div id="main-cont">
       <Sidebar />
-      {selectedRow && (
-        <OpenSidenav onClose={closeSideNavigation} selectedRow={selectedRow} />
-      )}
-      <div id="content-body" style={{ width: selectedRow ? '35%' : '100%' }}>
-          <div></div>
+      {loading ? (
+        <BounceLoader />
+      ) : (
+        <>
+          {selectedRow && (
+            <OpenSidenav onClose={closeSideNavigation} selectedRow={selectedRow} />
+          )}
+          <div id="content-body" style={{ width: selectedRow ? '35%' : '100%' }}>
+            <div></div>
             <DataGrid
               rows={rows}
               columns={columns}
@@ -71,17 +77,21 @@ console.log(rows)
               }}
               loading={loading}
               pageSize={10}
-            //   pageSizeOptions={[10,15, 25, 50, 100]}
+              //   pageSizeOptions={[10,15, 25, 50, 100]}
               className="datagrid-root"
               onRowClick={handleRowClick}
               disableColumnSelector
               disableColumnFilter
-              getRowClassName={(params) => (params.indexRelativeToCurrentPage % 2 !== 0 ? 'striped-row' : {})}
+              getRowClassName={(params) =>
+                params.indexRelativeToCurrentPage % 2 !== 0
+                  ? 'striped-row'
+                  : 'striped-row-none'
+              }
             />
-          
-      </div>
+          </div>
+        </>
+      )}
     </div>
-  );
-};
+  )}
 
 export default Albums;

@@ -1,18 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import BounceLoader from '../Loaders/BounceLoader';
 
-const EditableModal = ({ photo, onClose, onSave }) => {
+const EditableModal = ({ photo, onClose, onTitleChange }) => {
   const [title, setTitle] = useState(photo.title);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setTitle(photo.title);
+  }, [photo.title]);
 
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
   };
 
-  const handleSave = () => {
-    onSave({ ...photo, title });
-    onClose();
+  const handleSave = async () => {
+    try {
+      const response = await fetch(`https://snap-safari-backend.onrender.com/photos/${photo.id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ title }),
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      // Notify parent component that the title has changed
+      onTitleChange();
+      onClose();
+
+    } catch (error) {
+      console.error('Error updating title:', error);
+    }
   };
 
   return (
+    
+    
     <div className="modal">
       <div className="modal-content">
         <img src={photo.image_url} alt="" />
@@ -21,6 +45,9 @@ const EditableModal = ({ photo, onClose, onSave }) => {
         <button onClick={onClose}>Cancel</button>
       </div>
     </div>
+    
+     
+    
   );
 };
 

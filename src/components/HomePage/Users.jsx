@@ -3,17 +3,21 @@ import Sidebar from './Sidebar';
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
 import LinearProgress from '@mui/material/LinearProgress';
 import OpenSidenav from './OpenSidenav';
+import BounceLoader from '../../Loaders/BounceLoader';
 
 const Users = () => {
   const [rows, setRows] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedRow, setSelectedRow] = useState(null);
-
-console.log(rows)
+  const [albums, setAlbums] = useState([]);
+// console.log(albums)
+// console.log(rows)
   useEffect(() => {
    
       const fetchData = async () => {
           try {
+            setLoading(true);
+
               const response = await fetch('https://snap-safari-backend.onrender.com/users/');
               if (!response.ok) {
                   throw new Error('Network response was not ok');
@@ -28,8 +32,36 @@ console.log(rows)
       };
 
     fetchData();
-  }, []);
+      // fetch albums
+      const fetchAlbums = async () => {
+        try {
+          setLoading(true);
 
+            const response = await fetch('https://snap-safari-backend.onrender.com/albums/');
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            // console.log(response)
+            const data = await response.json();
+            // Calculate the count of filtered albums for each user
+    const updatedRows = rows.map(user => {
+      const userAlbums = data.filter(album => album.users_id === user.id);
+      return {
+        ...user,
+        albumsCount: userAlbums.length,
+      };
+    });
+            setRows(updatedRows); 
+            setLoading(false);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+      };
+      fetchAlbums();
+      }, []);
+
+  const filteredAlbums = albums.filter(album => album.users_id == rows.id);
+console.log(filteredAlbums)
   function CustomToolbar() {
     return (
       <GridToolbarContainer>
@@ -43,6 +75,8 @@ console.log(rows)
     { field: 'name', headerName: 'Name', width: 150 ,flex: 1 },
     { field: 'username', headerName: 'Username', width: 150 ,flex: 1  },
     { field: 'email', headerName: 'E-mail', width: 150,flex: 1  },
+    { field: 'albumsCount', headerName: 'Album Count', width: 150,flex: 1  },
+
     // Add more columns as needed
   ];
 
@@ -59,6 +93,10 @@ console.log(rows)
   return (
     <div id="main-cont">
       <Sidebar />
+      {loading ? (
+        <BounceLoader />
+      ) : (
+        <>
        {selectedRow && (
         <OpenSidenav onClose={closeSideNavigation} selectedRow={selectedRow} />
       )}
@@ -84,7 +122,8 @@ console.log(rows)
             />
           
       </div>
-     
+       </>
+      )}
     </div>
   );
 };

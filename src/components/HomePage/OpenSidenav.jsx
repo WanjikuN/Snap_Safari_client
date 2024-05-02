@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
 import EditableModal from '../../Reusables/EditableModal';
+import BounceLoader from '../../Loaders/BounceLoader';
 
 const OpenSidenav = ({ selectedRow, onClose }) => {
     const location = useLocation();
@@ -8,10 +9,12 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
     const [loading, setLoading] = useState(true);
     const [selectedPhoto, setSelectedPhoto] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [shouldReload, setShouldReload] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
+                setLoading(true);
                 const response = await fetch('https://snap-safari-backend.onrender.com/photos/');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
@@ -26,14 +29,22 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
         };
 
         fetchData();
-    }, [selectedRow]);
+    }, [selectedRow, shouldReload]); // Include shouldReload in the dependency array
 
     const handlePhotoClick = (photo) => {
         setSelectedPhoto(photo);
         setIsModalOpen(true);
     };
 
+    const handleTitleChange = () => {
+        setShouldReload(!shouldReload); // Toggle shouldReload state
+    };
+
     return (
+        <>
+        {loading ? (
+        <BounceLoader />
+      ) : (
         <>
             <div className="side-navigation">
                 <button onClick={onClose}>Close</button>
@@ -60,8 +71,11 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
                 <EditableModal
                     photo={selectedPhoto}
                     onClose={() => setIsModalOpen(false)}
+                    onTitleChange={handleTitleChange} // Pass the callback function
                 />
             )}
+              </>
+      )}
         </>
     );
 };
