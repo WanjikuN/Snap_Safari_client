@@ -385,3 +385,62 @@ p {
   align-items: center;
 
 }
+/* Responsiveness */
+@media only screen and (max-width: 600px) {
+  #landing {
+      height: auto;
+      margin: 10px;
+  }
+
+  #landing-body {
+    /* border: 1px solid black; */
+      flex-direction: column;
+      height: auto;
+  }
+
+  #landing-content {
+      width: 100%;
+      padding: 20px 20px 20px 0px;
+      margin: 10px;
+  }
+
+  #content-cont {
+      /* border: 1px solid black; */
+      width: 400px;
+      margin-left: 0;
+  }
+.overlay-text{
+  top: 30%;
+  left: 50%;
+}
+  #auth {
+      width: 100%;
+  }
+.side-navigation{
+  position: absolute;
+  /* border: 1px solid black; */
+  width: 80vw !important;
+  height: 80vh;
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+  margin: 10px 10px 10px 60px;
+}
+
+
+
+  /* Additional styles for small devices */
+}
+/* Medium devices (tablets) */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+  /* Add your tablet styles here */
+}
+
+/* Large devices (laptops/desktops) */
+@media only screen and (min-width: 1025px) {
+  /* Add your desktop styles here */
+}
+
+/* Extra large devices (large desktops) */
+@media only screen and (min-width: 1441px) {
+  /* Add your extra-large desktop styles here */
+}

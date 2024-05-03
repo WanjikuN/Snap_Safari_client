@@ -121,8 +121,11 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
                             
                         </div>
                         <div className="profile-info">
+                            {!user?null:
+                            <>
                             <p className="username">{user.username.toUpperCase()}</p>
                             <p className="email">{user.email}</p>
+                            </>}
                         </div>
                     </div>
          

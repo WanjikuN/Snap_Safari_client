@@ -17,9 +17,10 @@ const LandingPage = () =>{
                 </div>
                 <div id="auth">
                     {/* auth */}
+                    
                 </div>
             </div>
         </div>
     )
 }
-export default LandingPage
+export default LandingPage  
