@@ -5,7 +5,9 @@ import { signInWithPopup } from "firebase/auth";
 const Authentication = ({ value, setValue }) => {
 
     const handleClick = () => {
+        // google modal
         signInWithPopup(auth, provider).then((data) => {
+            // get a signed in email
             setValue(data.user.email);
             localStorage.setItem("email", data.user.email);
         });

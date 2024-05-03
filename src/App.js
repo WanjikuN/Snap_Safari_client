@@ -26,6 +26,7 @@ function App() {
    <Navbar />
    <Routes>
     <Route exact path="/" element={<LandingPage  value={value} setValue={setValue}/>} />
+    {/* restrict path if there is no email in storage */}
     {value?
     <>
     <Route exact path="/users" element={<Users />} />
