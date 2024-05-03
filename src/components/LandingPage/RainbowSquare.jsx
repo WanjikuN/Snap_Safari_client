@@ -6,7 +6,7 @@ import ImageListItem from '@mui/material/ImageListItem';
   export default function RainbowSquare() {
     return (
       <Box sx={{ width: '100%', height: '98%', display: 'flex', justifyContent: 'center', alignItems: 'center', overflowY: 'hidden' }}>
-        <p className="overlay-text text-overlay">Journey Through the Savannah:<br/> Document the Untamed Beauty of Africa with<br/> SnapSafari</p>
+        <p className="overlay-text text-overlay">Journey Through the Savannah:<br/> Document the Untamed Beauty of<br/> Africa with<br/> SnapSafari</p>
         <ImageList   
         variant="masonry" cols={3} gap={8}
         className="grayscale-on-default blur-on-hover"  >

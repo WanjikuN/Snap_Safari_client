@@ -18,8 +18,8 @@ const Authentication = ({ value, setValue }) => {
     });
 
     return (
-        <div>
-            <button onClick={handleClick}>Sign in with Google</button>
+        <div id="auth-body">
+            <button onClick={handleClick} className="login-with-google-btn">Sign in with Google</button>
         </div>
     );
 }
