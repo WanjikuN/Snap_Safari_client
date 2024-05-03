@@ -1,5 +1,5 @@
 body{
-    background-color: #b4eeffa1;
+    background-color: #b4eeff71;
     
 }
 /* landing page */
@@ -20,8 +20,10 @@ body{
 }
 #nav h2{
     margin-right:10% ;
-    font-family:'Times New Roman', Times, serif;
-    border-bottom: 1px solid #0000FF;
+    font-family: "OpenSans_SemiBold";
+    border-bottom: 1px solid rgba(0, 0, 0, 0.465);
+    color: #d2b48c;
+    font-size: 30px;
 }
 #landing-body{
     /* border: 1px solid black; */
@@ -95,8 +97,8 @@ body{
     /* justify-content: center; */
 
   }
-  #sidebar div{
-    border-bottom: 2px solid blue;
+  #sidebar .sidebar{
+    border-bottom: 2px solid #ffd700;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
     padding: 10px;
@@ -108,16 +110,21 @@ body{
     box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.246);
     cursor: pointer;
   }
+  .icons,
+  #sidebar .sidebar:hover{
+    border: 2px solid #ffd700;
 
+  }
   #content-body{
-    border-bottom: 3px solid blue;
+    border-bottom: 4px solid #ffd700;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     height: 95%;
     width: 80%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* align-items: center; */
     padding: 15px 5%;
     margin: 0px 25px;
 
@@ -179,20 +186,24 @@ body{
     align-items: center;
   }
   .photos{
-    /* border: 1px solid rgba(0, 0, 0, 0.132); */
+    /* border: 1px solid rgba(0, 0, 0, 0.928); */
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
     width: 30%;
-    height: 30%;
+    height: 150px;
     margin: 10px;
     overflow: hidden;
     cursor: pointer;
+    border: 2px solid #ffd700;
 
+
+  }
+  .photos:hover{
+    border: 2px solid #ffd700;
   }
   .photos img{
     /* border: 1px solid black; */
-    width:100%;
-    height: 100%;
-  }
+    width:auto;
+    height: 150px  }
   .image-container {
     position: relative;
     display: inline-block;
@@ -330,12 +341,19 @@ p {
 }
 
 .profile-image {
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .profile-info {
   display: flex;
   flex-direction: column;
+  border: 1px solid rgba(0, 0, 0, 0.132);
+  border-radius: 4px;
+  padding: 10px;
+  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.12);
+  border-radius: 10px 0px 10px 0px;
+  font-family: "OpenSans_SemiBold";
+
 }
 
 .username {
@@ -355,4 +373,15 @@ p {
   margin-top: 5px;
   font-size: 14px;
 }
+.header{
+  background-color:  #deb8877e;
+  font-family: "OpenSans_SemiBold";
+  font-weight: bold;
+}
+#content-albums h3,
+#content-body h3{
+  font-family: "OpenSans_SemiBold";
+  display: flex;
+  align-items: center;
 
+}

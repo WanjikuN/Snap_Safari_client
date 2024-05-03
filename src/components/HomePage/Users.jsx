@@ -4,6 +4,7 @@ import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
 import LinearProgress from '@mui/material/LinearProgress';
 import OpenSidenav from './OpenSidenav';
 import BounceLoader from '../../Loaders/BounceLoader';
+import { FaUsers } from "react-icons/fa";
 
 const Users = () => {
   const [rows, setRows] = useState([]);
@@ -39,10 +40,10 @@ const Users = () => {
   };
 
   const columns = [
-    { field: 'name', headerName: 'Name', width: 150, flex: 1 },
-    { field: 'username', headerName: 'Username', width: 150, flex: 1 },
-    { field: 'email', headerName: 'E-mail', width: 150, flex: 1 },
-    { field: 'albumsCount', headerName: 'Album Count', width: 150, flex: 1 },
+    { field: 'name', headerName: 'Name', width: 150, flex: 1 ,headerClassName:'header'},
+    { field: 'username', headerName: 'Username', width: 150, flex: 1 ,headerClassName:'header'},
+    { field: 'email', headerName: 'E-mail', width: 150, flex: 1 ,headerClassName:'header'},
+    { field: 'albumsCount', headerName: 'Album Count', width: 150, flex: 1,headerClassName:'header' },
   ];
 
   // Define a function to calculate the albums count for each user
@@ -95,6 +96,7 @@ const Users = () => {
         <>
           {selectedRow && <OpenSidenav onClose={closeSideNavigation} selectedRow={selectedRow}  />}
           <div id="content-body" style={{ width: selectedRow ? '35%' : '100%' }}>
+            <h3><FaUsers size={30} color="black"/>Users</h3>
             <DataGrid
               rows={rows}
               columns={columns}

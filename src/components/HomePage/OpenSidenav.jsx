@@ -29,6 +29,7 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
             setPhotos(filteredPhotos);
             setLoading(false);
         } catch (error) {
+            setLoading(true);
             console.error('Error fetching data:', error);
         }
     };
@@ -44,6 +45,7 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
             setAlbums(filteredAlbums); 
             setLoading(false);
         } catch (error) {
+            setLoading(true);
             console.error('Error fetching data:', error);
         }
     };
@@ -58,6 +60,7 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
             setUser(data); 
             setLoading(false);
         } catch (error) {
+            setLoading(true);
             console.error('Error fetching data:', error);
         }
     };
@@ -72,10 +75,10 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
             setSpecificAlbum(data); 
             setLoading(false);
         } catch (error) {
+            setLoading(true);
             console.error('Error fetching data:', error);
         }
     };
-    console.log("User::",user)
     useEffect(() => {
         if (location.pathname === "/users") {
             fetchUserById();
@@ -114,18 +117,22 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
                     <div id="user-albums-profile">
                         {/* User Profile */}
                         <div className="profile-image">
-                            <CgProfile size={40} />
+                            <CgProfile size={35} />
+                            
                         </div>
                         <div className="profile-info">
-                            <p className="username">{user.username}</p>
+                            <p className="username">{user.username.toUpperCase()}</p>
                             <p className="email">{user.email}</p>
                         </div>
                     </div>
+         
+                    <div style={{height: '90%'}}> 
+               
                     <DataGrid
                         rows={albums}
                         columns={[
-                            { field: 'id', headerName: 'ID', width: 100 },
-                            { field: 'title', headerName: 'Title', width: 200 },
+                            { field: 'id', headerName: 'Album ID', width: 100 ,headerClassName:'header'},
+                            { field: 'title', headerName: 'Album Title', width: 200 ,flex:1,headerClassName:'header' },
                         ]}
                         slots={{
                             toolbar: CustomToolbar,
@@ -134,6 +141,8 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
                         pageSize={5}
                         disableSelectionOnClick // Disables row selection on click
                         />
+                    </div>
+                   
                 </div>
                 
                 ) : (

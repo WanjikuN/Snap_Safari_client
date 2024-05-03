@@ -4,6 +4,7 @@ import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
 import LinearProgress from '@mui/material/LinearProgress';
 import OpenSidenav from './OpenSidenav';
 import BounceLoader from '../../Loaders/BounceLoader';
+import { MdPhotoAlbum } from "react-icons/md";
 
 const Albums = () => {
   const [rows, setRows] = useState([]);
@@ -39,8 +40,8 @@ console.log(rows)
   }
 
   const columns = [
-    { field: 'id', headerName: 'No', width: 50  },
-    { field: 'title', headerName: 'Title', width: 150 ,flex: 1 },
+    { field: 'id', headerName: 'No', width: 50 ,headerClassName:'header' },
+    { field: 'title', headerName: 'Title', width: 150 ,flex: 1 ,headerClassName:'header'},
 
   ];
 
@@ -63,7 +64,7 @@ console.log(rows)
             <OpenSidenav onClose={closeSideNavigation} selectedRow={selectedRow} />
           )}
           <div id="content-body" style={{ width: selectedRow ? '35%' : '100%' }}>
-            <div></div>
+          <h3> <MdPhotoAlbum size={30} color="black" />Albums</h3>
             <DataGrid
               rows={rows}
               columns={columns}
