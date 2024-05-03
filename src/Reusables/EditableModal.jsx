@@ -12,7 +12,8 @@ const EditableModal = ({ photo, onClose, onTitleChange }) => {
   const handleTitleChange = (e) => {
     setTitle(e.target.value);
   };
-
+  // async function to update photo title
+  // PATCH: photos/<int:id>
   const handleSave = async () => {
     try {
       const response = await fetch(`https://snap-safari-backend.onrender.com/photos/${photo.id}`, {
@@ -34,9 +35,7 @@ const EditableModal = ({ photo, onClose, onTitleChange }) => {
     }
   };
 
-  return (
-    
-    
+  return (    
     <div className="modal">
       <div className="modal-content">
         <img src={photo.image_url} alt="" />
@@ -44,9 +43,7 @@ const EditableModal = ({ photo, onClose, onTitleChange }) => {
         <button onClick={handleSave}>Update</button>
         <button onClick={onClose}>Cancel</button>
       </div>
-    </div>
-    
-     
+    </div>    
     
   );
 };

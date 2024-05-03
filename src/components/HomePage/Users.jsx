@@ -45,8 +45,9 @@ const Users = () => {
     { field: 'email', headerName: 'E-mail', width: 150, flex: 1 ,headerClassName:'header'},
     { field: 'albumsCount', headerName: 'Album Count', width: 150, flex: 1,headerClassName:'header' },
   ];
-
-  // Define a function to calculate the albums count for each user
+  // async function to get all users
+  // Get: albums/
+  // Calculate the albums count for each user
   const calculateAlbumsCount = async (userId) => {
     // console.log("UserId::",userId)
     try {

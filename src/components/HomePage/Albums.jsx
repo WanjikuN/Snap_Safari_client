@@ -13,7 +13,8 @@ const Albums = () => {
 
 console.log(rows)
   useEffect(() => {
-   
+    // async function to get all users
+    // Get: albums/
       const fetchData = async () => {
           try {
             setLoading(true);

@@ -17,6 +17,8 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
     const [user, setUser] = useState();
     const [specificAlbum, setSpecificAlbum] = useState();
 
+    // async function to get all photos
+    // GET: photos/
     const fetchPhotos = async () => {
         try {
             setLoading(true);
@@ -33,6 +35,9 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
             console.error('Error fetching data:', error);
         }
     };
+
+    // async function to get all albums
+    // GET: albums/
     const fetchAlbums = async () => {
         try {
           setLoading(true);
@@ -49,6 +54,9 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
             console.error('Error fetching data:', error);
         }
     };
+    // async function to get users by Id
+    // GET: users/<int:id>
+
     const fetchUserById = async () => {
         try {
           setLoading(true);
@@ -64,6 +72,8 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
             console.error('Error fetching data:', error);
         }
     };
+    // async function to get albums by Id
+    // GET: albums/<int:id>
     const fetchAlbumById = async () => {
         try {
           setLoading(true);
@@ -80,6 +90,7 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
         }
     };
     useEffect(() => {
+        // fetch only if the path requires the data
         if (location.pathname === "/users") {
             fetchUserById();
             fetchAlbums();
@@ -142,7 +153,7 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
                             loadingOverlay: LinearProgress,
                           }}
                         pageSize={5}
-                        disableSelectionOnClick // Disables row selection on click
+                        disableSelectionOnClick
                         />
                     </div>
                    
