@@ -122,7 +122,7 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
       ) : (
         <>
             <div className="side-navigation">
-                <button onClick={onClose}>Close</button>
+                <button className="close" onClick={onClose}>Close</button>
                 {location.pathname === "/users" ? (
                     <div id="user-albums">
                     <div id="user-albums-profile">
@@ -149,10 +149,14 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
                             { field: 'title', headerName: 'Album Title', width: 200 ,flex:1,headerClassName:'header' },
                         ]}
                         slots={{
-                            toolbar: CustomToolbar,
+                            // toolbar: CustomToolbar,
                             loadingOverlay: LinearProgress,
                           }}
+                          disableColumnSelector
+
                         pageSize={5}
+                        disableColumnFilter
+
                         disableSelectionOnClick
                         />
                     </div>

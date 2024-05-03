@@ -1,6 +1,7 @@
+import Authentication from "./Authentication"
 import RainbowSquare from "./RainbowSquare"
 
-const LandingPage = () =>{
+const LandingPage = ({value, setValue}) =>{
     return(
         <div id="landing">
             {/* cont */}
@@ -17,6 +18,7 @@ const LandingPage = () =>{
                 </div>
                 <div id="auth">
                     {/* auth */}
+                    <Authentication  value={value} setValue={setValue}/>
                     
                 </div>
             </div>
