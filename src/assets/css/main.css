@@ -14,6 +14,27 @@ body{
     width: 99.6vw;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+}
+#nav #logout{
+  margin-right: 12px;
+  border-radius: 10px;
+  border: 1px solid #d2b48c;
+  box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.15);
+  padding: 5px;
+  cursor: pointer;
+}
+#logout:hover{
+ font-size: 24px;
+ padding: 10px;
+
+}
+#logout:hover::after {
+  content: "Logout";
+  font-size: 14px;
+  color: #d2b48c;
+  padding: 10px;
+  
 }
 #nav h2{
     margin-right:10% ;
@@ -155,7 +176,7 @@ body{
     font-size: 12px;
 }
   
-.side-navigation button {
+.side-navigation .close {
     border-radius: 4px;
     margin-top: 20px;
     padding: 10px 20px;
@@ -166,7 +187,7 @@ body{
     float: right;
 }
 .modal-content button:hover,
-.side-navigation button:hover {
+.side-navigation .close:hover {
     background-color: #555;
 }
 #photos-container{
