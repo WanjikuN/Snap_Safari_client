@@ -5,6 +5,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import OpenSidenav from './OpenSidenav';
 import BounceLoader from '../../Loaders/BounceLoader';
 import { MdPhotoAlbum } from "react-icons/md";
+import Spinner from '../../Loaders/Spinner';
 
 const Albums = () => {
   const [rows, setRows] = useState([]);
@@ -58,7 +59,8 @@ console.log(rows)
     <div id="main-cont">
       <Sidebar />
       {loading ? (
-        <BounceLoader />
+        // <BounceLoader />
+        <Spinner />
       ) : (
         <>
           {selectedRow && (
