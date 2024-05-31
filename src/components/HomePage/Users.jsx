@@ -15,7 +15,7 @@ const Users = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const usersResponse = await fetch('https://snap-safari-backend.onrender.com/users/');
+        const usersResponse = await fetch(`${process.env.REACT_APP_API_URL}/users/`);
         if (!usersResponse.ok) {
           throw new Error('Network response was not ok');
         }
@@ -51,7 +51,7 @@ const Users = () => {
   const calculateAlbumsCount = async (userId) => {
     // console.log("UserId::",userId)
     try {
-      const albumsResponse = await fetch(`https://snap-safari-backend.onrender.com/albums/`);
+      const albumsResponse = await fetch(`${process.env.REACT_APP_API_URL}/albums/`);
       if (!albumsResponse.ok) {
         throw new Error('Network response was not ok');
       }

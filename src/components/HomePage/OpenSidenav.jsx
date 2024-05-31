@@ -24,7 +24,7 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
     const fetchPhotos = async () => {
         try {
             setLoading(true);
-            const response = await fetch('https://snap-safari-backend.onrender.com/photos/');
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/photos/`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -43,7 +43,7 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
     const fetchAlbums = async () => {
         try {
           setLoading(true);
-            const response = await fetch('https://snap-safari-backend.onrender.com/albums/');
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/albums/`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
               }
@@ -62,7 +62,7 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
     const fetchUserById = async () => {
         try {
           setLoading(true);
-            const response = await fetch(`https://snap-safari-backend.onrender.com/users/${selectedRow.id}`);
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/users/${selectedRow.id}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
               }
@@ -79,7 +79,7 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
     const fetchAlbumById = async () => {
         try {
           setLoading(true);
-            const response = await fetch(`https://snap-safari-backend.onrender.com/album/${selectedRow.id}`);
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/album/${selectedRow.id}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
               }

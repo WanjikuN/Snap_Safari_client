@@ -16,7 +16,7 @@ const EditableModal = ({ photo, onClose, onTitleChange, toast }) => {
   // PATCH: photos/<int:id>
   const handleSave = async () => {
     try {
-      const response = await fetch(`https://snap-safari-backend.onrender.com/photos/${photo.id}`, {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/photos/${photo.id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
