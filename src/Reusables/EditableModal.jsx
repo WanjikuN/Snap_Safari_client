@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import BounceLoader from '../Loaders/BounceLoader';
 
-const EditableModal = ({ photo, onClose, onTitleChange }) => {
+const EditableModal = ({ photo, onClose, onTitleChange, toast }) => {
   const [title, setTitle] = useState(photo.title);
   const [loading, setLoading] = useState(true);
 
@@ -28,9 +28,11 @@ const EditableModal = ({ photo, onClose, onTitleChange }) => {
       }
       // Notify parent component that the title has changed
       onTitleChange();
+      toast.success('Title updated successfully');
       onClose();
 
     } catch (error) {
+      toast.error("Error updating title")
       console.error('Error updating title:', error);
     }
   };
