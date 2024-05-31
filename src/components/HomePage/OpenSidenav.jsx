@@ -7,6 +7,7 @@ import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
 import LinearProgress from '@mui/material/LinearProgress';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Spinner from '../../Loaders/Spinner';
 
 const OpenSidenav = ({ selectedRow, onClose }) => {
     const location = useLocation();
@@ -120,7 +121,8 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
     return (
         <>
         {loading ? (
-        <BounceLoader />
+        // <BounceLoader />
+        <Spinner />
       ) : (
         <>
             <div className="side-navigation">

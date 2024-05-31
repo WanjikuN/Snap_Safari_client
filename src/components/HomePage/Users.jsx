@@ -5,6 +5,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 import OpenSidenav from './OpenSidenav';
 import BounceLoader from '../../Loaders/BounceLoader';
 import { FaUsers } from "react-icons/fa";
+import Spinner from '../../Loaders/Spinner';
 
 const Users = () => {
   const [rows, setRows] = useState([]);
@@ -92,7 +93,8 @@ const Users = () => {
     <div id="main-cont">
       <Sidebar />
       {loading ? (
-        <BounceLoader />
+        // <BounceLoader />
+        <Spinner />
       ) : (
         <>
           {selectedRow && <OpenSidenav onClose={closeSideNavigation} selectedRow={selectedRow}  />}
