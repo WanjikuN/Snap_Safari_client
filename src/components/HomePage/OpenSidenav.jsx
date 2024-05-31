@@ -5,6 +5,8 @@ import BounceLoader from '../../Loaders/BounceLoader';
 import { CgProfile } from "react-icons/cg";
 import { DataGrid, GridToolbarContainer } from '@mui/x-data-grid';
 import LinearProgress from '@mui/material/LinearProgress';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const OpenSidenav = ({ selectedRow, onClose }) => {
     const location = useLocation();
@@ -181,6 +183,7 @@ const OpenSidenav = ({ selectedRow, onClose }) => {
                     photo={selectedPhoto}
                     onClose={() => setIsModalOpen(false)}
                     onTitleChange={handleTitleChange}
+                    toast={toast}
                 />
             )}
               </>
